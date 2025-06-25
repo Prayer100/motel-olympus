@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motel Olympus - Conforto e Privacidade</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo {
+            font-size: 3em;
+            font-weight: bold;
+            color: #764ba2;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .facade-image {
+            width: 100%;
+            max-width: 600px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin: 20px auto;
+            display: block;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .admin-section {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .admin-btn {
+            background: #764ba2;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .admin-btn:hover {
+            background: #5a3a7a;
+            transform: translateY(-2px);
+        }
+
+        .admin-panel {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .menu-item {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .menu-item i {
+            font-size: 3em;
+            color: #764ba2;
+            margin-bottom: 15px;
+        }
+
+        .menu-item h3 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.5em;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 2% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 95%;
+            max-width: 1000px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        .suite-container {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .suite-images {
+            flex: 4;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .suite-info {
+            flex: 1;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .suite-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .suite-image:hover {
+            transform: scale(1.05);
+        }
+
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .schedule-table th,
+        .schedule-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .schedule-table th {
+            background-color: #764ba2;
+            color: white;
+        }
+
+        .schedule-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .price-info {
+            background: #e8f4f8;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+
+        .price-info h4 {
+            color: #764ba2;
+            margin-bottom: 10px;
+        }
+
+        .file-input {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        .upload-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .map-container {
+            width: 100%;
+            height: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .promotion-box {
+            background: linear-gradient(45deg, #ff6b6b, #ffa500);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .instagram-link {
+            display: inline-block;
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+            margin: 20px 0;
+        }
+
+        .instagram-link:hover {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .suite-container {
+                flex-direction: column;
+            }
+            
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .logo {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">🏛️ MOTEL OLYMPUS</div>
+            <div class="subtitle">Conforto, Privacidade e Elegância</div>
+            
+            <!-- Imagem da Fachada -->
+            <img id="facadeImage" class="facade-image" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDYwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI2MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjNjY3ZWVhIi8+Cjx0ZXh0IHg9IjMwMCIgeT0iMTUwIiBmaWxsPSJ3aGl0ZSIgZm9udC1zaXplPSIyNCIgZm9udC1mYW1pbHk9IkFyaWFsIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5GYWNoYWRhIGRvIE1vdGVsIE9seW1wdXM8L3RleHQ+Cjx0ZXh0IHg9IjMwMCIgeT0iMTgwIiBmaWxsPSJ3aGl0ZSIgZm9udC1zaXplPSIxNiIgZm9udC1mYW1pbHk9IkFyaWFsIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj4oQ2xpcXVlIG5vIGJvdMOjbyBBZG1pbiBwYXJhIGFkZGljaW9uYXIgaW1hZ2VtKTwvdGV4dD4KPC9zdmc+" alt="Fachada do Motel Olympus">
+            
+            <!-- Seção Admin -->
+            <div class="admin-section">
+                <button class="admin-btn" onclick="toggleAdmin()">
+                    <i class="fas fa-lock"></i> Acesso Administrativo
+                </button>
+                
+                <div id="adminPanel" class="admin-panel">
+                    <h3>Área Administrativa</h3>
+                    <input type="password" id="adminPassword" placeholder="Digite a senha" style="padding: 10px; margin: 10px; border-radius: 5px; border: 1px solid #ddd;">
+                    <button onclick="checkPassword()" class="admin-btn">Entrar</button>
+                    
+                    <div id="adminContent" style="display: none;">
+                        <div class="upload-section">
+                            <h4>Upload de Imagem da Fachada</h4>
+                            <input type="file" id="facadeUpload" class="file-input" accept="image/*" onchange="uploadFacade()">
+                        </div>
+                        
+                        <div class="upload-section">
+                            <h4>Upload de Imagens das Suítes</h4>
+                            <select id="suiteSelect" style="padding: 10px; margin: 10px; border-radius: 5px; border: 1px solid #ddd;">
+                                <option value="light">Suíte Light</option>
+                                <option value="standard">Suíte Standard</option>
+                                <option value="executiva">Suíte Executiva</option>
+                                <option value="plus">Suíte Plus</option>
+                            </select>
+                            <input type="file" id="suiteUpload" class="file-input" accept="image/*" multiple onchange="uploadSuiteImages()">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Menu Principal -->
+        <div class="menu-grid">
+            <div class="menu-item" onclick="openModal('scheduleModal')">
+                <i class="fas fa-clock"></i>
+                <h3>Horário de Funcionamento</h3>
+                <p>Confira nossos horários de atendimento</p>
+            </div>
+
+            <div class="menu-item" onclick="openModal('suitesModal')">
+                <i class="fas fa-bed"></i>
+                <h3>Suítes</h3>
+                <p>Conheça nossas acomodações</p>
+            </div>
+
+            <div class="menu-item" onclick="openModal('promotionModal')">
+                <i class="fas fa-gift"></i>
+                <h3>Promoções</h3>
+                <p>Ofertas especiais</p>
+            </div>
+
+            <div class="menu-item" onclick="openModal('locationModal')">
+                <i class="fas fa-map-marker-alt"></i>
+                <h3>Localização</h3>
+                <p>Como chegar até nós</p>
+            </div>
+
+            <div class="menu-item" onclick="openInstagram()">
+                <i class="fab fa-instagram"></i>
+                <h3>Instagram</h3>
+                <p>Siga-nos nas redes sociais</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Horários -->
+    <div id="scheduleModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('scheduleModal')">&times;</span>
+            <h2><i class="fas fa-clock"></i> Horário de Funcionamento</h2>
+            
+            <table class="schedule-table">
+                <thead>
+                    <tr>
+                        <th>Dias da Semana</th>
+                        <th>Horário</th>
+                        <th>Observações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Domingo a Quarta-feira</strong></td>
+                        <td>06:00h às 00:00h</td>
+                        <td>
+                            • Pernoite permitido até meia-noite<br>
+                            • Entrada não permitida após 00:00h<br>
+                            • Permanência conforme tabela de valores
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Quinta a Sábado</strong></td>
+                        <td>24 horas</td>
+                        <td>• Sem restrições de horário de entrada</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal Suítes -->
+    <div id="suitesModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('suitesModal')">&times;</span>
+            <h2><i class="fas fa-bed"></i> Nossas Suítes</h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 20px 0;">
+                <div class="menu-item" onclick="openSuite('light')">
+                    <i class="fas fa-lightbulb"></i>
+                    <h3>Suíte Light</h3>
+                    <p>R$ 65,00 - 2h</p>
+                </div>
+                <div class="menu-item" onclick="openSuite('standard')">
+                    <i class="fas fa-star"></i>
+                    <h3>Suíte Standard</h3>
+                    <p>R$ 90,00 - 2h</p>
+                </div>
+                <div class="menu-item" onclick="openSuite('executiva')">
+                    <i class="fas fa-crown"></i>
+                    <h3>Suíte Executiva</h3>
+                    <p>R$ 115,00 - 2h</p>
+                </div>
+                <div class="menu-item" onclick="openSuite('plus')">
+                    <i class="fas fa-gem"></i>
+                    <h3>Suíte Plus</h3>
+                    <p>R$ 140,00 - 2h</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Suíte Individual -->
+    <div id="suiteDetailModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('suiteDetailModal')">&times;</span>
+            <h2 id="suiteTitle"></h2>
+            
+            <div class="suite-container">
+                <div class="suite-images" id="suiteImages">
+                    <!-- Imagens serão carregadas aqui -->
+                </div>
+                
+                <div class="suite-info" id="suiteInfo">
+                    <!-- Informações da suíte serão carregadas aqui -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Promoções -->
+    <div id="promotionModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('promotionModal')">&times;</span>
+            <h2><i class="fas fa-gift"></i> Promoções</h2>
+            
+            <div class="promotion-box">
+                NÃO DISPONÍVEL NO MOMENTO
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Localização -->
+    <div id="locationModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('locationModal')">&times;</span>
+            <h2><i class="fas fa-map-marker-alt"></i> Nossa Localização</h2>
+            
+            <div style="text-align: center; margin: 20px 0;">
+                <h3>📍 Rodovia BR-376 km 114, S/N</h3>
+                <p><strong>Entre Paranavaí e Alto Paraná</strong></p>
+            </div>
+            
+            <div class="map-container">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3651.8977!2d-52.4633!3d-23.0833!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjPCsDA1JzAwLjAiUyA1MsKwMjcnNDguMCJX!5e0!3m2!1spt-BR!2sbr!4v1620000000000!5m2!1spt-BR!2sbr"
+                    width="100%" 
+                    height="100%" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy">
+                </iframe>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dados das suítes
+        const suitesData = {
+            light: {
+                name: 'Suíte Light',
+                amenities: 'TV, som, ar condicionado, frigobar e chuveiro quente',
+                price2h: 'R$ 65,00',
+                priceExtra: 'R$ 12,00',
+                priceOvernight: 'R$ 100,00',
+                images: []
+            },
+            standard: {
+                name: 'Suíte Standard',
+                amenities: 'TV, som, ar condicionado, frigobar, chuveiro quente e banheira',
+                price2h: 'R$ 90,00',
+                priceExtra: 'R$ 16,00',
+                priceOvernight: 'R$ 140,00',
+                images: []
+            },
+            executiva: {
+                name: 'Suíte Executiva',
+                amenities: 'TV, som, ar condicionado, frigobar, sauna, chuveiro quente e banheira',
+                price2h: 'R$ 115,00',
+                priceExtra: 'R$ 22,00',
+                priceOvernight: 'R$ 175,00',
+                images: []
+            },
+            plus: {
+                name: 'Suíte Plus',
+                amenities: 'TV, som, ar condicionado, frigobar, sauna, pole dance, chuveiro quente e banheira',
+                price2h: 'R$ 140,00',
+                priceExtra: 'R$ 22,00',
+                priceOvernight: 'R$ 220,00',
+                images: []
+            }
+        };
+
+        // Funções de Modal
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // Função para abrir Instagram
+        function openInstagram() {
+            window.open('https://instagram.com/motel.olympus', '_blank');
+        }
+
+        // Funções Admin
+        function toggleAdmin() {
+            const panel = document.getElementById('adminPanel');
+            panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function checkPassword() {
+            const password = document.getElementById('adminPassword').value;
+            if (password === 'maria') {
+                document.getElementById('adminContent').style.display = 'block';
+                alert('Acesso liberado!');
+            } else {
+                alert('Senha incorreta!');
+            }
+        }
+
+        // Upload de fachada
+        function uploadFacade() {
+            const file = document.getElementById('facadeUpload').files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('facadeImage').src = e.target.result;
+                    localStorage.setItem('facadeImage', e.target.result);
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Upload de imagens das suítes
+        function uploadSuiteImages() {
+            const files = document.getElementById('suiteUpload').files;
+            const suiteType = document.getElementById('suiteSelect').value;
+            
+            if (files.length > 0) {
+                const images = [];
+                let processed = 0;
+                
+                for (let i = 0; i < Math.min(files.length, 10); i++) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        images.push(e.target.result);
+                        processed++;
+                        
+                        if (processed === Math.min(files.length, 10)) {
+                            suitesData[suiteType].images = images;
+                            localStorage.setItem('suites', JSON.stringify(suitesData));
+                            alert(`${images.length} imagens adicionadas à ${suitesData[suiteType].name}!`);
+                        }
+                    };
+                    reader.readAsDataURL(files[i]);
+                }
+            }
+        }
+
+        // Abrir detalhes da suíte
+        function openSuite(suiteType) {
+            const suite = suitesData[suiteType];
+            
+            document.getElementById('suiteTitle').innerHTML = `<i class="fas fa-bed"></i> ${suite.name}`;
+            
+            // Carregar imagens
+            const imagesContainer = document.getElementById('suiteImages');
+            if (suite.images.length > 0) {
+                imagesContainer.innerHTML = suite.images.map(img => 
+                    `<img src="${img}" class="suite-image" alt="${suite.name}">`
+                ).join('');
+            } else {
+                imagesContainer.innerHTML = `
+                    <div style="text-align: center; padding: 50px; background: #f8f9fa; border-radius: 10px;">
+                        <i class="fas fa-image" style="font-size: 3em; color: #ccc; margin-bottom: 20px;"></i>
+                        <p>Imagens não disponíveis</p>
+                        <p><small>Use o painel administrativo para adicionar fotos</small></p>
+                    </div>
+                `;
+            }
+            
+            // Carregar informações
+            document.getElementById('suiteInfo').innerHTML = `
+                <h3>${suite.name}</h3>
+                <p><strong>Comodidades:</strong></p>
+                <p>${suite.amenities}</p>
+                
+                <div class="price-info">
+                    <h4>💰 Estada de 2 horas</h4>
+                    <p><strong>${suite.price2h}</strong></p>
+                    <p>Hora excedente: ${suite.priceExtra}</p>
+                </div>
+                
+                <div class="price-info">
+                    <h4>🌙 Pernoite (12 horas)</h4>
+                    <p><strong>${suite.priceOvernight}</strong></p>
+                    <p>Hora excedente: ${suite.priceExtra}</p>
+                </div>
+            `;
+            
+            closeModal('suitesModal');
+            openModal('suiteDetailModal');
+        }
+
+        // Carregar dados salvos
+        window.onload = function() {
+            // Carregar imagem da fachada
+            const savedFacade = localStorage.getItem('facadeImage');
+            if (savedFacade) {
+                document.getElementById('facadeImage').src = savedFacade;
+            }
+            
+            // Carregar dados das suítes
+            const savedSuites = localStorage.getItem('suites');
+            if (savedSuites) {
+                Object.assign(suitesData, JSON.parse(savedSuites));
+            }
+        };
+
+        // Fechar modal clicando fora
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        };
+    </script>
+</body>
+</html>
