@@ -1,0 +1,135 @@
+/* === PÁGINAS EM TELA CHEIA === */
+.page-fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    z-index: 1000;
+    overflow-y: auto;
+    padding-top: 80px;
+}
+
+.page-header {
+    display: flex;
+    align-items: center;
+    padding: 1rem 2rem;
+    margin-bottom: 2rem;
+}
+
+.page-header h2 {
+    color: #d4af37;
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    margin: 0;
+    flex: 1;
+    text-align: center;
+}
+
+.btn-back {
+    background: rgba(212, 175, 55, 0.1);
+    border: 2px solid #d4af37;
+    color: #d4af37;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-back:hover {
+    background: #d4af37;
+    color: #1a1a1a;
+}
+
+/* Modal menor (10% redução) */
+.modal-small {
+    width: 81% !important;
+    max-width: 540px !important;
+    padding: 1.8rem !important;
+}
+
+.modal-small h2 {
+    font-size: 1.8rem !important;
+}
+
+.modal-small .horario-group h3 {
+    font-size: 1.35rem !important;
+}
+
+.modal-small .horario-time {
+    font-size: 1.08rem !important;
+}
+
+/* Localização em tela cheia */
+.localizacao-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    padding: 0 2rem;
+}
+
+.localizacao-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.fachada-image img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.endereco {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.endereco h3 {
+    color: #d4af37;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.endereco-principal {
+    color: #ffffff;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.endereco-referencia {
+    color: #cccccc;
+    font-size: 1rem;
+}
+
+.mapa {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .localizacao-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .page-header {
+        padding: 1rem;
+    }
+    
+    .page-header h2 {
+        font-size: 2rem;
+    }
+}
