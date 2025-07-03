@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motel Olympus - Conforto e Privacidade</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>MOTEL OLYMPUS</h1>
+                <span class="tagline">Conforto & Privacidade</span>
+            </div>
+            <nav class="nav-menu">
+                <a href="#home" class="nav-link active" onclick="showHome()">Início</a>
+                <a href="#suites" class="nav-link" onclick="showSuites()">Suítes</a>
+                <a href="#horarios" class="nav-link" onclick="toggleModal('horarios-modal')">Horários</a>
+                <a href="#localizacao" class="nav-link" onclick="showLocalizacao()">Localização</a>
+                <a href="#contato" class="nav-link" onclick="openInstagram()">Contato</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- PÁGINA PRINCIPAL -->
+    <div id="main-page" class="main-page">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-overlay"></div>
+            <div class="hero-image">
+                <img src="images/Fachada/foto21.jpg" alt="Fachada Motel Olympus">
+            </div>
+            <div class="hero-content">
+                <div class="container">
+                    <h2 class="hero-title">Bem-vindo ao Motel Olympus</h2>
+                    <p class="hero-subtitle">Onde o conforto encontra a privacidade</p>
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary" onclick="showSuites()">Conheça Nossas Suítes</button>
+                        <button class="btn btn-secondary" onclick="toggleModal('horarios-modal')">Horários de Funcionamento</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Menu Principal -->
+        <section class="main-menu">
+            <div class="container">
+                <div class="menu-grid">
+                    <div class="menu-item" onclick="toggleModal('horarios-modal')">
+                        <div class="menu-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3>Horário de Funcionamento</h3>
+                        <p>Confira nossos horários de atendimento</p>
+                    </div>
+
+                    <div class="menu-item" onclick="showSuites()">
+                        <div class="menu-icon">
+                            <i class="fas fa-bed"></i>
+                        </div>
+                        <h3>Suítes</h3>
+                        <p>Conheça nossos 4 tipos de suítes</p>
+                    </div>
+
+                    <div class="menu-item" onclick="toggleModal('promocao-modal')">
+                        <div class="menu-icon">
+                            <i class="fas fa-gift"></i>
+                        </div>
+                        <h3>Promoção</h3>
+                        <p>Ofertas especiais disponíveis</p>
+                    </div>
+
+                    <div class="menu-item" onclick="showLocalizacao()">
+                        <div class="menu-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h3>Localização</h3>
+                        <p>Como chegar ao Motel Olympus</p>
+                    </div>
+
+                    <div class="menu-item" onclick="openInstagram()">
+                        <div class="menu-icon">
+                            <i class="fab fa-instagram"></i>
+                        </div>
+                        <h3>Instagram</h3>
+                        <p>Siga-nos nas redes sociais</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- PÁGINA DE SUÍTES -->
+    <div id="suites-page" class="page-fullscreen" style="display: none;">
+        <div class="page-header">
+            <button class="btn-back" onclick="showHome()">
+                <i class="fas fa-arrow-left"></i> Voltar
+            </button>
+            <h2>Escolha sua Suíte</h2>
+        </div>
+        <div class="container">
+            <div class="suites-grid">
+                <div class="suite-card" onclick="showSuiteDetails('light')">
+                    <div class="suite-image">
+                        <img src="images/Light/foto6.jpg" alt="Suíte Light">
+                    </div>
+                    <div class="suite-info">
+                        <h3>Suíte Light</h3>
+                        <p>Conforto essencial</p>
+                        <span class="suite-price">A partir de R$ 65,00</span>
+                    </div>
+                </div>
+
+                <div class="suite-card" onclick="showSuiteDetails('standard')">
+                    <div class="suite-image">
+                        <img src="images/Standard/foto11.jpg" alt="Suíte Standard">
+                    </div>
+                    <div class="suite-info">
+                        <h3>Suíte Standard</h3>
+                        <p>Conforto com banheira</p>
+                        <span class="suite-price">A partir de R$ 90,00</span>
+                    </div>
+                </div>
+
+                <div class="suite-card" onclick="showSuiteDetails('executiva')">
+                    <div class="suite-image">
+                        <img src="images/Executiva/foto1.jpg" alt="Suíte Executiva">
+                    </div>
+                    <div class="suite-info">
+                        <h3>Suíte Executiva</h3>
+                        <p>Luxo com sauna</p>
+                        <span class="suite-price">A partir de R$ 115,00</span>
+                    </div>
+                </div>
+
+                <div class="suite-card" onclick="showSuiteDetails('plus')">
+                    <div class="suite-image">
+                        <img src="images/Plus/foto16.jpg" alt="Suíte Plus">
+                    </div>
+                    <div class="suite-info">
+                        <h3>Suíte Plus</h3>
+                        <p>Experiência completa</p>
+                        <span class="suite-price">A partir de R$ 140,00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PÁGINA DE LOCALIZAÇÃO -->
+    <div id="localizacao-page" class="page-fullscreen" style="display: none;">
+        <div class="page-header">
+            <button class="btn-back" onclick="showHome()">
+                <i class="fas fa-arrow-left"></i> Voltar
+            </button>
+            <h2>Localização</h2>
+        </div>
+        <div class="container">
+            <div class="localizacao-content">
+                <div class="localizacao-info">
+                    <div class="fachada-image">
+                        <img src="images/Fachada/foto21.jpg" alt="Fachada Motel Olympus">
+                    </div>
+                    <div class="endereco">
+                        <h3>Endereço</h3>
+                        <p class="endereco-principal">br 376, km114, s/n - Alto Paraná, PR, 87750-000</p>
+                        <p class="endereco-referencia">Entre Paranavaí e Alto Paraná, a 2km do Posto Laranjão</p>
+                    </div>
+                </div>
+                <div class="mapa">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.8!2d-52.1!3d-23.1!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sBR-376%2C%20km114%2C%20Alto%20Paran%C3%A1%20-%20PR%2C%2087750-000!5e0!3m2!1spt-BR!2sbr!4v1234567890123!5m2!1spt-BR!2sbr"
+                        width="100%" 
+                        height="400" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PÁGINA DE DETALHES DA SUÍTE -->
+    <div id="suite-details-page" class="page-fullscreen" style="display: none;">
+        <div class="suite-layout">
+            <div class="suite-gallery">
+                <div class="gallery-container">
+                    <div id="suite-images" class="suite-images">
+                        <!-- Imagens serão carregadas dinamicamente -->
+                    </div>
+                </div>
+            </div>
+            <div class="suite-info-panel">
+                <div class="suite-info-content">
+                    <button class="btn-back" onclick="backToSuites()">
+                        <i class="fas fa-arrow-left"></i> Voltar às Suítes
+                    </button>
+                    <h2 id="suite-title">Suíte</h2>
+                    <div id="suite-amenities" class="amenities">
+                        <!-- Comodidades serão carregadas dinamicamente -->
+                    </div>
+                    <div id="suite-pricing" class="pricing">
+                        <!-- Preços serão carregados dinamicamente -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Horários (REDUZIDO 10%) -->
+    <div id="horarios-modal" class="modal">
+        <div class="modal-content modal-small">
+            <span class="close" onclick="toggleModal('horarios-modal')">&times;</span>
+            <h2>Horário de Funcionamento</h2>
+            <div class="horarios-table">
+                <div class="horario-group">
+                    <h3>Domingo a Quarta-feira</h3>
+                    <p class="horario-time">06:00h às 00:00h (Meia-noite)</p>
+                    <ul class="horario-info">
+                        <li>✓ Início do Pernoite até a Meia-noite</li>
+                        <li>✗ Não será permitida entrada após a Meia-noite</li>
+                        <li>✓ Permanência pelo período desejado conforme tabela de valores</li>
+                    </ul>
+                </div>
+                <div class="horario-group">
+                    <h3>Quinta-feira a Sábado</h3>
+                    <p class="horario-time">Atendimento 24 horas</p>
+                    <ul class="horario-info">
+                        <li>✓ Sem restrições de horário de entrada</li>
+                        <li>✓ Funcionamento ininterrupto</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Promoção -->
+    <div id="promocao-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="toggleModal('promocao-modal')">&times;</span>
+            <h2>Promoções</h2>
+            <div class="promocao-content">
+                <div class="promocao-unavailable">
+                    <i class="fas fa-info-circle"></i>
+                    <h3>NÃO DISPONÍVEL NO MOMENTO</h3>
+                    <p>Fique atento às nossas redes sociais para futuras promoções!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Motel Olympus</h3>
+                    <p>Conforto e privacidade em um ambiente sofisticado</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Contato</h4>
+                    <p>br 376, km114, s/n - Alto Paraná, PR</p>
+                    <p>Entre Paranavaí e Alto Paraná</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Redes Sociais</h4>
+                    <a href="https://instagram.com/motel.olympus"  class="social-link">
+                        <i class="fab fa-instagram"></i> @motel.olympus
+                    </a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Motel Olympus. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
